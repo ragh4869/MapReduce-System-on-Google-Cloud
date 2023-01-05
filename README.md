@@ -33,14 +33,27 @@ This has been explained in detail in the project MapReduced-From-Scratch and the
 
 ### How to run or perform the tests using the code?
 
-The VM.py file is a singular code file which contains all the operations that need to be done from creating the VMs, split files, run the map-reduce system and deleting all the created VMs. 
+The **VM.py** file is a singular code file which contains all the operations that need to be done from creating the VMs, split files, run the map-reduce system and deleting all the created VMs. 
 
 Moreover, increase the IN_USE_ADDRESSES of us-central1 to more than 20 from the default 8 as the number of VM instances to be called will be around 15-20. 
 
 Apart from running this single file, you will be prompted 1 time to run the Server VM through the command prompt as shown below:
 * The server-vm has to be started by opening the command prompt and running the code: gcloud compute ssh --zone=us-central1-a server-vm
 * After this, you should navigate to server_files: cd server_files/ 
-* Run the command python3 server.py storage
+* Run the command python3 server.py 
+
+#### Code changes and file addition:
+
+Since I have used the native storage on cloud (storing data on Server VM) as it is the fastest, if you choose to use any GCP storage like GCP Bucket, do the following changes -
+* Add the service account key file to the server_files
+* The code changes that need to be done is for the change in the name of the service account key (json file). This name change needs to be implemented in 2 code files which are **VM.py** and **server.py**. In the below code - 
+
+os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = "raghav-cskumar-fall2022-387fa080baee.json"
+
+Instead of "raghav-cskumar-fall2022-387fa080baee.json", replace it with your service account key name (json file name).
+
+* VM.py: Line 57 (in both VM.py files)
+* server.py : This code is not added and this can be added under the server_program()
 
 ### Process Flow:
 
